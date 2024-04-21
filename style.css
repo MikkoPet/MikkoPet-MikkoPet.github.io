@@ -30,7 +30,8 @@ p {
     font-size: 1.6rem;
 }
 
-main h2 {
+main h2,
+footer h2 {
     margin-top: 15%;
     margin-left: 20%;
     margin-bottom: 5%;
@@ -75,6 +76,8 @@ ul {
     list-style-type: none;
     background-color: black;
     overflow: hidden;
+    text-align: center;
+    text-transform: uppercase;
     padding-left: 25%;
 }
 
@@ -93,8 +96,8 @@ li a {
     width: 15vh;
     color: rgb(35, 98, 153);
     background-color: aqua;
-    text-align: center;
-    /*     padding: 10px 10px;*/
+    vertical-align: middle;
+    display: table-cell;
     text-decoration: none;
 }
 
@@ -245,3 +248,12 @@ li a:hover {
 }
 
 /*FOOTER*/
+
+footer {
+    margin-top: 25em;
+    background-color: aliceblue;
+}
+
+footer h2 {
+    padding-top: 10rem;
+}
