@@ -59,6 +59,7 @@ footer h2 {
 
 body {
     background: linear-gradient(0deg, rgb(240, 225, 205) 0%, rgb(255, 241, 230) 18%, rgba(255, 250, 244, 1) 100%);
+    overflow-x: hidden;
 }
 
 
@@ -80,7 +81,7 @@ header h5 {
 
 .homeBgImage>img {
     height: 95vh;
-    width: 100%;
+    width: auto;
     padding-left: 2%;
 }
 
@@ -110,7 +111,7 @@ nav {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    width: 100%;
+    width: 100vw;
 }
 
 ul {
@@ -263,7 +264,7 @@ li a:active {
     display: flex;
     flex-flow: column wrap;
     height: 8em;
-    width: 100%;
+    width: 10vw;
     margin-left: 10em;
 }
 
