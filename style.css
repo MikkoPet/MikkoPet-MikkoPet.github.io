@@ -35,6 +35,11 @@ h2 {
     text-shadow: 1px 1px 3.5px rgba(212, 89, 23, 0.37);
 }
 
+a img:hover,
+.softIcon,
+.langIcon {
+    filter: saturate(200%) brightness(180%) hue-rotate(-50deg);  
+}
 
 p,
 em {
@@ -42,7 +47,7 @@ em {
 }
 
 em {
-    color: rgba(212, 89, 23, 1);
+    color: rgba(255, 88, 137);
 }
 
 main h2,
@@ -140,7 +145,7 @@ li a {
 
 li a:hover,
 li a:active {
-    background-color: rgba(212, 89, 23, 1);
+    background-color: rgba(255, 88, 137, 1);
     color: rgb(255, 255, 255);
 }
 
@@ -181,7 +186,7 @@ li a:active {
 
 .proj,
 .date {
-    color: rgb(250, 182, 81);
+    color: rgb(255, 88, 137);
 }
 
 .date {
