@@ -160,3 +160,50 @@ li a:hover {
 .expBlock h5, .date, .projIcon {
     margin-top: 5rem;
 }
+
+.expBlock img {
+    padding-right: 5%;
+    padding-left: 15%;
+}
+
+/*competences*/
+
+.compBlock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3fr 1fr 6fr;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.compBlock img, h6 {
+    width: 3em;
+    font-size: 1.5rem;
+}
+
+.ssTit {
+    text-orientation: mixed;
+    writing-mode: vertical-lr;
+}
+
+.langIcon, .softIcon {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 25%;
+    padding-right: 25%;
+
+}
+
+.compBlock p {
+    padding-left: 30%;
+}
+
+.compBlock p:first-child {
+    padding-top: 7%;
+}
+
+
+
+
