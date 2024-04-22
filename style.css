@@ -260,7 +260,7 @@ li a:active {
 }
 
 
-.hobBlock>div {
+.hobBlock>section {
     display: flex;
     flex-flow: column wrap;
     height: 8em;
@@ -268,7 +268,7 @@ li a:active {
     margin-left: 10em;
 }
 
-.hobBlock>div:first-child {
+.hobBlock>section:first-child {
     margin-left: 0;
 }
 
