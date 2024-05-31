@@ -11,20 +11,6 @@ body {
     background: linear-gradient(to right, rgb(253, 250, 251), rgb(252, 247, 242));
 }
 
-#back-button {
-    font-size: 1.5rem;
-    margin-top: 5vh;
-    background-color: #f783a8;
-    color: white;
-    font-weight: bolder;
-    margin-left: 5vw;
-    margin-right: 5vw;
-}
-#back-button:hover {
-    background-color: #e2346b;
-    color: rgb(238, 247, 213);
-}
-
 main {
     display: flex;
     flex-direction: column;
@@ -50,6 +36,7 @@ a {
     padding-top: 2vh;
     padding-bottom: 2vh;
     border-radius: 2.5%;
+    transition: all 100ms ease-in;
 }
 
 a:hover {
