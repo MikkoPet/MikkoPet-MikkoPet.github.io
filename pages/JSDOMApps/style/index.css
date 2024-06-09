@@ -44,3 +44,23 @@ a:hover {
     color: white;
     font-weight: bolder;
 }
+
+.monster-slayer {
+    font-size: 2.5rem;
+    color: rgb(6, 41, 8);
+    text-decoration: none;
+    display: block;
+    background-color: rgb(250, 218, 174);
+    margin-top: 1vh;
+    margin-bottom: 0.8vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border-radius: 2.5%;
+    transition: all 100ms ease-in;
+}
+
+.monster-slayer:hover {
+    background-color: rgb(236, 182, 107);
+    color: white;
+    font-weight: bolder;
+}
