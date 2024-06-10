@@ -95,6 +95,7 @@ class Arena {
     startGame() {
         startBtn.style.display = "none";
         gamePad.style.display = "inline";
+        logSpace.innerHTML = '';
     }
     restartGame() {
         this.playerHealth = 100;
