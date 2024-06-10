@@ -1,10 +1,15 @@
 "use strict";
 const gameInterface = document.querySelector(".gameInterface");
-const startBtn = document.querySelector('.startButton');
+const startScreen = document.querySelector('.startScreen');
 const gamePad = document.querySelector('.gamePad');
+const easySelector = document.querySelector('.easySelector');
+const mediumSelector = document.querySelector('.midSelector');
+const hardSelector = document.querySelector('.hardSelector');
+const overlord = document.querySelector('.overlord');
 const attackBtn = document.querySelector(".attackButton");
 const specialAttackBtn = document.querySelector(".specialAttackButton");
 const healBtn = document.querySelector(".healButton");
+const specialHealBtn = document.querySelector(".specialHealBtn");
 const abandonBtn = document.querySelector(".abandonButton");
 const displayPlayerHealth = document.querySelector(".playerHealth");
 const displayMonsterHealth = document.querySelector(".ghoulHealth");
@@ -12,17 +17,22 @@ const healthZone = document.querySelector(".healthZone");
 const playerHealthBar = healthZone.querySelector('div:first-child');
 const monsterHealthBar = healthZone.querySelector('div:last-child');
 let logSpace = document.querySelector('.logs');
+let powerChargeDisplay = document.querySelector('.gamePad p');
 class Arena {
     constructor() {
         this.playerHealth = 100;
         this.monsterHealth = 100;
         this.logs = [];
+        this.monsterMinPotency = 5;
+        this.monsterMaxPotency = 10;
+        this.killCharges = 0;
+        this.powerCharges = 0;
     }
     defineDamage(min, max) {
         return Math.floor((Math.random() * max) + min);
     }
     monsterAttack() {
-        let monsterPotency = this.defineDamage(5, 10);
+        let monsterPotency = this.defineDamage(this.monsterMinPotency, this.monsterMaxPotency);
         this.playerHealth -= monsterPotency;
         this.logs.unshift(`The Monster attacks you, causing ${monsterPotency} damage!`);
         this.checkPlayerHealth();
@@ -40,6 +50,11 @@ class Arena {
         this.monsterAttack();
     }
     playerSpecialAttack() {
+        this.powerCharges -= 3;
+        if (this.powerCharges < 3) {
+            specialAttackBtn.classList.replace('specialAttackButtonActive', 'specialAttackButton');
+            specialHealBtn.classList.replace('specialHealBtnActive', 'specialHealBtn');
+        }
         let playerPotency = this.defineDamage(10, 20);
         this.monsterHealth -= playerPotency;
         this.logs.unshift(`You attack the monster with all your might, causing ${playerPotency} damage!`);
@@ -49,8 +64,18 @@ class Arena {
         ;
         this.monsterAttack();
     }
+    playerSpecialHeal() {
+        this.powerCharges -= 3;
+        if (this.powerCharges < 3) {
+            specialAttackBtn.classList.replace('specialAttackButtonActive', 'specialAttackButton');
+            specialHealBtn.classList.replace('specialHealBtnActive', 'specialHealBtn');
+        }
+        this.playerHealth <= 50 ? this.playerHealth += 50 : this.playerHealth = 100;
+        this.logs.unshift(`Your desperation fuels your healing magic, restoring 50 health!`);
+        this.monsterAttack();
+    }
     playerHeal() {
-        this.playerHealth += 10;
+        this.playerHealth <= 90 ? this.playerHealth += 10 : this.playerHealth = 100;
         this.logs.unshift(`You heal yourself for 10 health!`);
         this.monsterAttack();
     }
@@ -61,7 +86,9 @@ class Arena {
     checkEnemyHealth() {
         if (this.monsterHealth <= 0) {
             alert(`You have slain the monster!`);
-            this.restartGame();
+            this.monsterHealth = 0;
+            this.updateHealthDisplay();
+            this.returnToMain();
             return true;
         }
     }
@@ -69,6 +96,15 @@ class Arena {
         if (this.playerHealth <= 0) {
             alert(`The monster has slain you!`);
             this.restartGame();
+        }
+        this.checkPower();
+    }
+    checkPower() {
+        this.powerCharges += 1;
+        powerChargeDisplay.innerText = `Power charges for special actions: ${this.powerCharges}`;
+        if (this.powerCharges >= 3) {
+            specialAttackBtn.classList.replace('specialAttackButton', 'specialAttackButtonActive');
+            specialHealBtn.classList.replace('specialHealBtn', 'specialHealBtnActive');
         }
     }
     updateHealthDisplay() {
@@ -79,6 +115,10 @@ class Arena {
     }
     updateLog() {
         logSpace.innerHTML = '';
+        if (this.logs.length > 20) {
+            this.logs.length = 20;
+        }
+        ;
         for (let n of this.logs) {
             let logPart = document.createElement('p');
             logPart.innerText = n;
@@ -92,24 +132,72 @@ class Arena {
             logSpace.append(logPart);
         }
     }
+    setDifficultyEasy() {
+        this.monsterHealth = 100;
+        this.monsterMinPotency = 3;
+        this.monsterMaxPotency = 5;
+        easySelector.classList.replace("monsterButton", "deadMonster");
+        this.startGame();
+    }
+    setDifficultyMid() {
+        this.monsterHealth = 100;
+        this.monsterMinPotency = 5;
+        this.monsterMaxPotency = 10;
+        mediumSelector.classList.replace("monsterButton", "deadMonster");
+        this.startGame();
+    }
+    setDifficultyHard() {
+        this.monsterHealth = 100;
+        this.monsterMinPotency = 10;
+        this.monsterMaxPotency = 15;
+        hardSelector.classList.replace("monsterButton", "deadMonster");
+        this.startGame();
+    }
+    setBoss() {
+        this.monsterMinPotency = 8;
+        this.monsterMaxPotency = 10;
+        this.monsterHealth = 500;
+        displayMonsterHealth.innerText = `Monster's health: ${this.monsterHealth}`;
+        this.startGame();
+    }
     startGame() {
-        startBtn.style.display = "none";
+        this.updateHealthDisplay();
+        startScreen.style.display = "none";
         gamePad.style.display = "inline";
         logSpace.innerHTML = '';
+    }
+    returnToMain() {
+        this.updateHealthDisplay();
+        startScreen.style.display = "inline";
+        gamePad.style.display = "none";
+        this.killCharges += 1;
+        if (this.killCharges === 3) {
+            overlord.classList.replace('overlord', 'overlordReady');
+        }
     }
     restartGame() {
         this.playerHealth = 100;
         this.monsterHealth = 100;
         this.updateHealthDisplay();
-        startBtn.style.display = "inline";
+        startScreen.style.display = "inline";
         gamePad.style.display = "none";
+        this.resetStyle();
         return true;
+    }
+    resetStyle() {
+        hardSelector.classList.replace("deadMonster", "monsterButton");
+        mediumSelector.classList.replace("deadMonster", "monsterButton");
+        easySelector.classList.replace("deadMonster", "monsterButton");
     }
 }
 let game = new Arena;
-attackBtn.addEventListener("click", () => game.playerAttack());
-specialAttackBtn.addEventListener("click", () => game.playerSpecialAttack());
-healBtn.addEventListener("click", () => game.playerHeal());
-abandonBtn.addEventListener("click", () => game.abandon());
+attackBtn.addEventListener('click', () => game.playerAttack());
+specialAttackBtn.addEventListener('click', () => game.playerSpecialAttack());
+healBtn.addEventListener('click', () => game.playerHeal());
+specialHealBtn.addEventListener('click', () => game.playerSpecialHeal());
+abandonBtn.addEventListener('click', () => game.abandon());
 gamePad.style.display = 'none';
-startBtn.addEventListener("click", () => game.startGame());
+easySelector.addEventListener('click', () => game.setDifficultyEasy());
+mediumSelector.addEventListener('click', () => game.setDifficultyMid());
+hardSelector.addEventListener('click', () => game.setDifficultyHard());
+overlord.addEventListener('click', () => game.setBoss());
