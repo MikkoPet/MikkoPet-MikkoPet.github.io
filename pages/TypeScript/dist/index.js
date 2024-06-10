@@ -78,10 +78,17 @@ class Arena {
         monsterHealthBar.style.background = `linear-gradient(to left, rgb(255, 0, 55) ${this.monsterHealth}%, black ${this.monsterHealth - 0.1}%)`;
     }
     updateLog() {
-        logSpace.innerHTML = ``;
-        for (let n in this.logs) {
+        logSpace.innerHTML = '';
+        for (let n of this.logs) {
             let logPart = document.createElement('p');
-            logPart.innerText = this.logs[n];
+            logPart.innerText = n;
+            if (n[0] === "Y") {
+                logPart.style.color = "blue";
+                logPart.style.marginBottom = "2vh";
+            }
+            else {
+                logPart.style.color = "red";
+            }
             logSpace.append(logPart);
         }
     }
