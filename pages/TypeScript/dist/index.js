@@ -195,6 +195,7 @@ class Arena {
         hardSelector.classList.replace("deadMonster", "monsterButton");
         mediumSelector.classList.replace("deadMonster", "monsterButton");
         easySelector.classList.replace("deadMonster", "monsterButton");
+        overlord.classList.replace('overlordReady', 'overlord');
     }
 }
 let game = new Arena;
