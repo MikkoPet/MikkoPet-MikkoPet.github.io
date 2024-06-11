@@ -48,6 +48,7 @@ class Arena {
         }
         ;
         this.monsterAttack();
+        this.powerCharges += 1;
     }
     playerSpecialAttack() {
         this.powerCharges -= 3;
@@ -78,6 +79,7 @@ class Arena {
         this.playerHealth <= 90 ? this.playerHealth += 10 : this.playerHealth = 100;
         this.logs.unshift(`You heal yourself for 10 health!`);
         this.monsterAttack();
+        this.powerCharges += 1;
     }
     abandon() {
         this.powerCharges = 0;
@@ -99,7 +101,6 @@ class Arena {
             alert(`The monster has slain you!`);
             this.restartGame();
         }
-        this.powerCharges += 1;
         this.checkPower();
     }
     checkPower() {
