@@ -164,7 +164,6 @@ class Arena {
     }
     startGame() {
         this.powerCharges = 0;
-        this.killCharges = 0;
         this.checkPower();
         this.updateHealthDisplay();
         startScreen.style.display = "none";
@@ -183,6 +182,7 @@ class Arena {
         }
     }
     restartGame() {
+        this.killCharges = 0;
         this.playerHealth = 100;
         this.monsterHealth = 100;
         this.updateHealthDisplay();
