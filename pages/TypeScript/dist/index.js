@@ -80,6 +80,8 @@ class Arena {
         this.monsterAttack();
     }
     abandon() {
+        this.powerCharges = 0;
+        this.killCharges = 0;
         alert("You flee!");
         this.restartGame();
     }
@@ -97,10 +99,10 @@ class Arena {
             alert(`The monster has slain you!`);
             this.restartGame();
         }
+        this.powerCharges += 1;
         this.checkPower();
     }
     checkPower() {
-        this.powerCharges += 1;
         powerChargeDisplay.innerText = `Power charges for special actions: ${this.powerCharges}`;
         if (this.powerCharges >= 3) {
             specialAttackBtn.classList.replace('specialAttackButton', 'specialAttackButtonActive');
@@ -161,12 +163,17 @@ class Arena {
         this.startGame();
     }
     startGame() {
+        this.powerCharges = 0;
+        this.killCharges = 0;
+        this.checkPower();
         this.updateHealthDisplay();
         startScreen.style.display = "none";
         gamePad.style.display = "inline";
         logSpace.innerHTML = '';
     }
     returnToMain() {
+        specialAttackBtn.classList.replace('specialAttackButtonActive', 'specialAttackButton');
+        specialHealBtn.classList.replace('specialHealBtnActive', 'specialHealBtn');
         this.updateHealthDisplay();
         startScreen.style.display = "inline";
         gamePad.style.display = "none";
